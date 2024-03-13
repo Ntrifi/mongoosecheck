@@ -4,17 +4,18 @@ const express = require ('express');
 const app = express()
 //require dotenv
 require('dotenv').config()
+// mid-ware JSON
+app.use(express.json());
 //connect to DB
 const connectDB = require('./config/DbConnection')
 connectDB()
 //routes
-const userRoutes = require("./Routes/Contact");
-app.use("/user" , userRoutes);
+app.use('/api/contact',require ('./Routes/Contact'))
 //port
-const port = '4008';
+const PORT= process.env.PORT
 //server
-app.listen(port, (err) => {
+app.listen(PORT, (err) => {
     err ?
         console.log(err) :
-        console.log(`the server is running in http://localhost:${port}`)
+        console.log(`the server is running in http://localhost:${PORT}`)
 })
